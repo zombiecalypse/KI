@@ -42,7 +42,8 @@ class Graph
 	end
 
 	def connections v
-		@edges[v].select {|e| e!= Float.inf}
+		raise "#{v} not in edges" if @edges[v].nil?
+		@edges[v].select {|e,f| f!= Float.inf}
 	end
 
 	def route aRoute
@@ -114,10 +115,11 @@ class AStar < Graph
 		estimates = Hash.new
 		for line in airlineLines
 			name, air = line.split
+			iair = air.to_i
 			sname = name.to_sym
+			goal = sname if iair == 0
 			start = sname
-			goal ||= sname
-			estimates[sname] = air.to_i
+			estimates[sname] = iair
 		end
 		g = AStar.new estimates.keys, estimates
 		g.start = start
@@ -135,7 +137,7 @@ class AStar < Graph
 	end
 
 	def estimateFrom k
-		@estimates[k]
+		@estimates[k] || Float.inf
 	end
 
 	def findRoute # A STAR
@@ -150,7 +152,8 @@ class AStar < Graph
 			route = route.add(current)
 			return route if current == goal
 			closed << open.delete(current)
-			open += (connections(current).keys-closed)
+			conns = connections(current).collect{|e|e[0]} || []
+			open += (conns-closed)
 		end
 		raise "No Route found"
 	end
