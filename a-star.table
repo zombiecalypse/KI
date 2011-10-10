@@ -1,0 +1,23 @@
+Avignon 0
+Dijon 380
+Grenoble 210
+Limoges 430
+Lyon 200
+Montpellier 85
+Nancy 580
+Paris 605
+Toulouse 300
+Strassburg 700
+
+Toulouse Montpellier 240
+Toulouse Limoges 313
+Montpellier Avignon 91
+Avignon Grenoble 227
+Avignon Lyon 216
+Limoges Lyon 389
+Limoges Paris 396
+Paris Dijon 372
+Lyon Dijon 192
+Dijon Nancy 201
+Dijon Strassburg 335
+Nancy Strassburg 145
